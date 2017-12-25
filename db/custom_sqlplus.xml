@@ -1,0 +1,15 @@
+<project name="custom_sqlplus" basedir="." default="all">
+
+    <!--
+        DO NOT check your copy of this file in.
+        Once you have cloned the repo, run the following command in you cmd/shell, adding
+        - -(no space between) in front of 'assume-...'
+          git update-index assume-unchanged  the/path/to/file/custom_sqlplus.xml
+     -->
+
+    <target name="dbSQLPlusExe" unless="dbSQLPlusExeSet">
+        <echo message="setting sqlplus exe path"/>
+        <property name="dbSQLPlusExe" value="/Users/hlieu/Bin/instantclient_12_1/sqlplus"/>
+        <echo message="${dbSQLPlusExe}"/>
+    </target>
+</project>

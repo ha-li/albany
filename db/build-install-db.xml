@@ -1,0 +1,38 @@
+<project name="install-db" basedir="." default="all">
+    <include file="${basedir}/custom_sqlplus.xml" as="nested"/>
+
+    <condition property="dbUserNameSet">
+        <isset property="dbUserName"/>
+    </condition>
+
+    <target name="setDbUserName" unless="dbUserNameSet">
+        <echo message="setting user name"/>
+        <property name="dbUserName" value="bacsadm"/>
+        <echo message="${dbUserName}"/>
+    </target>
+
+    <condition property="dbSQLPlusConnectionSet">
+        <isset property="dbSQLPlusConnection"/>
+    </condition>
+
+    <target name="setDbSQLPlusConnection" unless="dbSQLPlusConnectionSet">
+        <echo message="setting sqlplus connection"/>
+        <property name="dbSQLPlusConnection" value="localhost:1521/xe"/>
+        <echo message="${dbSQLPlusConnection}"/>
+    </target>
+
+    <target name="configureDBProperties" depends="nested.dbSQLPlusExe, setDbUserName, setDbSQLPlusConnection"/>
+
+    <target name="sqlplusexe" depends="configureDBProperties" unless="doNotRunDBInstall">
+        <property environment="env"/>
+        <echo message="$PATH: ${env.PATH}"/>
+        <echo message="Doing a database install" />
+        <property name="install_db_params" value="NONE NONE NONE NONE NONE local"/>
+
+        <echo message=" ${dbUserName}/${dbUserName}@${dbSQLPlusConnection} @InstallDB.sql "/>
+        <exec dir="dbcr" executable="${dbSQLPlusExe}" failonerror="true" osfamily="unix">
+            <arg line=" ${dbUserName}/${dbUserName}@${dbSQLPlusConnection} @InstallDB.sql "/>
+        </exec>
+    </target>
+
+</project>

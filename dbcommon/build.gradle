@@ -1,0 +1,22 @@
+description = 'db common'
+
+repositories {
+   mavenCentral ()
+
+   // this is where my ojdbc driver is located...
+   flatDir {
+      dir "/Users/hlieu/Java/oracle/ojdbc6"
+   }
+}
+
+dependencies {
+   compile project (':model')
+
+   // my ojdbc driver jar, see flatDir
+   compile 'oracle:ojdbc6:11.2.0.3'
+   compile 'org.codehaus.btm:btm:2.1.3'
+   compile 'org.hibernate:hibernate-core:5.2.10.Final'
+   compile 'org.hibernate:hibernate-entitymanager:5.2.10.Final'
+
+   testCompile 'junit:junit:4.12'
+}

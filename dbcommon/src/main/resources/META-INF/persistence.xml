@@ -1,0 +1,27 @@
+<persistence version="2.1"
+    xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+        http://xmlns.jcp.org/xml/ns/persistence_2_1.xsd">
+    <persistence-unit name="ApplicationPU">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <jta-data-source>bacsadm</jta-data-source>
+
+        <class>bacs.domain.Transaction</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+
+        <properties>
+            <property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:bacsadm/bacsadm@localhost:1521:xe"/>
+            <property name="javax.persistence.jdbc.user" value="bacsadm"/>
+            <property name="javax.persistence.jdbc.password" value="bacsadm"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.use_sql_comments" value="true"/>
+            <property name="hibernate.use_new_id_generator_mappings" value="true"/>
+            <property name="hibernate.connection.autocommit" value="false"/>
+            <property name="hibernate.transaction.manager_lookup_class" value="org.hibernate.transaction.BTMTransactionManagerLookup"/>
+            <property name="hibernate.jndi.class" value="bitronix.tm.jndi.BitronixInitialContextFactory"/>
+        </properties>
+    </persistence-unit>
+</persistence>

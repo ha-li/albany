@@ -1,0 +1,19 @@
+description = 'Application Layer'
+
+repositories {
+   mavenCentral ()
+
+   // this is where my ojdbc driver is located...
+   flatDir {
+      dir "/Users/hlieu/java/oracle/ojdbc6"
+   }
+}
+
+dependencies {
+   compile project (':model')
+   compile project (':dbcommon')
+
+   // this is required for RepositoryTestUtil.java
+   testCompile project (':dbcommon').sourceSets.test.output
+   testCompile 'junit:junit:4.12'
+}
